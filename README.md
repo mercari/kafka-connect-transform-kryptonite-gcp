@@ -5,6 +5,8 @@ to do field-level encryption/decryption of records with or without schema in dat
 It uses authenticated encryption with associated data ([AEAD](https://en.wikipedia.org/wiki/Authenticated_encryption)) and in particular applies 
 [AES](https://en.wikipedia.org/wiki/Advanced_Encryption_Standard) in [GCM](https://en.wikipedia.org/wiki/Galois/Counter_Mode) mode.
 
+**This repository is forked from [hpgrahsl/kryptonite-for-kafka](https://github.com/hpgrahsl/kryptonite-for-kafka), thanks for [@hpgrahsl](https://github.com/hpgrahsl)**
+
 ## tl;dr
 
 ### Data Records without Schema
@@ -368,7 +370,7 @@ Also, depending on the configuration, it is possible to automate the key encript
 ### Build, installation / deployment
 
 This project can be built from source via Maven, or you can download the package from the 
-GitHub [release page](https://github.com/kouzoh/kafka-connect-transform-kryptonite-gcp/releases).
+GitHub [release page](https://github.com/mercari/kafka-connect-transform-kryptonite-gcp/releases).
 
 In order to deploy it you simply put the jar into a _'plugin path'_ that is configured to be scanned by your Kafka Connect worker nodes.
 
@@ -414,3 +416,4 @@ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 See the License for the specific language governing permissions and
 limitations under the License.
 ```
+
