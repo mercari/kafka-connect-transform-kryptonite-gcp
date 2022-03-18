@@ -21,5 +21,5 @@ jobs:
             mvn -s ${{ github.workspace }}/.github/workflows/settings.xml --batch-mode deploy
           fi
         env:
-          JFROG_USERNAME: ${{ secrets.JFROG_USERNAME }}
-          JFROG_PASSWORD: ${{ secrets.JFROG_PASSWORD }}
+          USERNAME: ${{ secrets.USERNAME }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
