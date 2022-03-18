@@ -1,0 +1,206 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  ~ Copyright (c) 2021. Hans-Peter Grahsl (grahslhp@gmail.com)
+  ~
+  ~ Licensed under the Apache License, Version 2.0 (the "License");
+  ~ you may not use this file except in compliance with the License.
+  ~ You may obtain a copy of the License at
+  ~
+  ~ http://www.apache.org/licenses/LICENSE-2.0
+  ~
+  ~ Unless required by applicable law or agreed to in writing, software
+  ~ distributed under the License is distributed on an "AS IS" BASIS,
+  ~ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  ~ See the License for the specific language governing permissions and
+  ~ limitations under the License.
+  ~
+  -->
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+
+  <groupId>com.github.hpgrahsl.kafka.connect</groupId>
+  <artifactId>kafka-connect-transform-kryptonite-parent</artifactId>
+  <version>0.3.1-SNAPSHOT</version>
+  <packaging>pom</packaging>
+
+  <name>kafka-connect-transform-kryptonite-parent</name>
+
+  <description>Kryptonite: An SMT for Kafka Connect</description>
+  <url>https://github.com/kouzoh/kafka-connect-smt-kryptonite-gcp</url>
+  <licenses>
+    <license>
+      <name>The Apache License, Version 2.0</name>
+      <url>https://www.apache.org/licenses/LICENSE-2.0</url>
+      <distribution>repo</distribution>
+    </license>
+  </licenses>
+  <inceptionYear>2021</inceptionYear>
+  <developers>
+    <developer>
+      <name>Hans-Peter Grahsl</name>
+      <email>grahslhp@gmail.com</email>
+      <url>https://github.com/hpgrahsl</url>
+      <roles>
+        <role>maintainer</role>
+      </roles>
+    </developer>
+  </developers>
+  <scm>
+    <connection>scm:git:git://github.com/kouzoh/kafka-connect-smt-kryptonite-gcp.git</connection>
+    <developerConnection>scm:git:ssh://github.com:kouzoh/kafka-connect-smt-kryptonite-gcp.git</developerConnection>
+    <url>https://github.com/kouzoh/kafka-connect-smt-kryptonite-gcp</url>
+  </scm>
+  <issueManagement>
+    <system>github</system>
+    <url>https://github.com/kouzoh/kafka-connect-smt-kryptonite-gcp/issues</url>
+  </issueManagement>
+
+  <modules>
+    <module>kafka-connect-transform-kryptonite-gcp</module>
+    <module>kryptonite</module>
+  </modules>
+
+  <properties>
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    <maven.compiler.source>1.8</maven.compiler.source>
+    <maven.compiler.target>1.8</maven.compiler.target>
+    <kafka.version>2.7.0</kafka.version>
+    <jackson.version>2.12.6</jackson.version>
+    <kryo.version>5.0.3</kryo.version>
+    <caffeine.version>2.9.3</caffeine.version>
+    <google.cloud.bom.version>0.166.0</google.cloud.bom.version>
+    <grpc.version>1.43.2</grpc.version>
+    <slf4j.version>1.7.35</slf4j.version>
+    <logback.version>1.2.8</logback.version>
+    <junit.version>5.7.0</junit.version>
+    <shade.plugin.version>3.2.4</shade.plugin.version>
+    <compiler.plugin.version>3.8.0</compiler.plugin.version>
+    <surefire.plugin.version>2.22.2</surefire.plugin.version>
+    <fmt.plugin.version>2.9</fmt.plugin.version>
+  </properties>
+
+  <distributionManagement>
+    <repository>
+      <id>central</id>
+      <name>mercari-releases</name>
+      <url>https://mercari.jfrog.io/mercari/libs-release-local</url>
+    </repository>
+    <snapshotRepository>
+      <id>snapshots</id>
+      <name>mercari-snapshots</name>
+      <url>https://mercari.jfrog.io/mercari/libs-snapshot-local</url>
+    </snapshotRepository>
+  </distributionManagement>
+
+  <dependencyManagement>
+    <dependencies>
+      <dependency>
+        <groupId>com.google.cloud</groupId>
+        <artifactId>google-cloud-bom</artifactId>
+        <version>${google.cloud.bom.version}</version>
+        <type>pom</type>
+        <scope>import</scope>
+      </dependency>
+    </dependencies>
+  </dependencyManagement>
+
+  <dependencies>
+    <dependency>
+      <groupId>org.junit.jupiter</groupId>
+      <artifactId>junit-jupiter</artifactId>
+      <version>${junit.version}</version>
+      <scope>test</scope>
+    </dependency>
+  </dependencies>
+
+  <build>
+    <pluginManagement>
+      <plugins>
+        <plugin>
+          <groupId>org.apache.maven.plugins</groupId>
+          <artifactId>maven-compiler-plugin</artifactId>
+          <version>${compiler.plugin.version}</version>
+          <configuration>
+            <compilerArgs>
+              <arg>-Xlint:all</arg>
+              <arg>-Werror</arg>
+            </compilerArgs>
+            <showWarnings>true</showWarnings>
+            <showDeprecation>true</showDeprecation>
+            <source>${maven.compiler.source}</source>
+            <target>${maven.compiler.target}</target>
+            <compilerArgs>
+              <!--<arg>-parameters</arg>-->
+            </compilerArgs>
+          </configuration>
+        </plugin>
+        <plugin>
+          <groupId>org.apache.maven.plugins</groupId>
+          <artifactId>maven-shade-plugin</artifactId>
+          <version>${shade.plugin.version}</version>
+          <executions>
+            <execution>
+              <phase>package</phase>
+              <goals>
+                <goal>shade</goal>
+              </goals>
+              <configuration>
+                <artifactSet>
+                  <excludes>
+                    <exclude>org.slf4j:slf4j-api:jar:</exclude>
+                    <exclude> org.slf4j:slf4j-log4j12:jar:</exclude>
+                    <exclude>log4j:log4j:jar:</exclude>
+                  </excludes>
+                </artifactSet>
+                <!-- https://github.com/grpc/grpc-java/issues/5794 -->
+                <!--<minimizeJar>true</minimizeJar>-->
+                <filters>
+                  <filter>
+                    <artifact>*:*</artifact>
+                    <excludes>
+                      <exclude>META-INF/*.SF</exclude>
+                      <exclude>META-INF/*.DSA</exclude>
+                      <exclude>META-INF/*.RSA</exclude>
+                    </excludes>
+                  </filter>
+                </filters>
+                <!-- https://github.com/grpc/grpc-java/issues/5493 -->
+                <transformers>
+                  <transformer implementation="org.apache.maven.plugins.shade.resource.ServicesResourceTransformer"/>
+                </transformers>
+              </configuration>
+            </execution>
+          </executions>
+        </plugin>
+        <plugin>
+          <artifactId>maven-surefire-plugin</artifactId>
+          <version>${surefire.plugin.version}</version>
+        </plugin>
+        <plugin>
+          <groupId>com.coveo</groupId>
+          <artifactId>fmt-maven-plugin</artifactId>
+          <version>${fmt.plugin.version}</version>
+          <executions>
+            <execution>
+              <goals>
+                <goal>format</goal>
+                <goal>check</goal>
+              </goals>
+            </execution>
+          </executions>
+        </plugin>
+      </plugins>
+    </pluginManagement>
+
+    <plugins>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-compiler-plugin</artifactId>
+      </plugin>
+    </plugins>
+
+  </build>
+
+</project>

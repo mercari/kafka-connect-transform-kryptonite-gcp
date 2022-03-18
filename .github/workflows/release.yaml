@@ -1,0 +1,29 @@
+name: release
+
+on:
+  push:
+    tags:
+      - "v*"
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-java@v2
+        with:
+          java-version: '8'
+          distribution: 'adopt'
+      - name: Publish package
+        run: |
+          mvn -s ${{ github.workspace }}/.github/workflows/settings.xml --batch-mode deploy
+          rm -rf */target/original-*.jar
+        env:
+          JFROG_USERNAME: ${{ secrets.JFROG_USERNAME }}
+          JFROG_PASSWORD: ${{ secrets.JFROG_PASSWORD }}
+      - name: Release
+        uses: softprops/action-gh-release@v1
+        with:
+          files: "*/target/*.jar"
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
