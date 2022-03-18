@@ -19,8 +19,8 @@ jobs:
           mvn -s ${{ github.workspace }}/.github/workflows/settings.xml --batch-mode deploy
           rm -rf */target/original-*.jar
         env:
-          JFROG_USERNAME: ${{ secrets.JFROG_USERNAME }}
-          JFROG_PASSWORD: ${{ secrets.JFROG_PASSWORD }}
+          USERNAME: ${{ secrets.USERNAME }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       - name: Release
         uses: softprops/action-gh-release@v1
         with:

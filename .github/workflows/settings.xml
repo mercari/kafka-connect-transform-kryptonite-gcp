@@ -10,18 +10,11 @@
       <id>mercari</id>
       <repositories>
         <repository>
-          <id>central</id>
-          <url>https://mercari.jfrog.io/mercari/libs-release</url>
+          <id>githubl</id>
+          <url>https://maven.pkg.github.com/mercari/kafka-connect-transform-kryptonite-gcp</url>
           <snapshots>
-            <enabled>false</enabled>
+            <enabled>true</enabled>
           </snapshots>
-        </repository>
-        <repository>
-          <id>snapshots</id>
-          <url>https://mercari.jfrog.io/mercari/libs-snapshot</url>
-          <releases>
-            <enabled>false</enabled>
-          </releases>
         </repository>
       </repositories>
     </profile>
@@ -29,14 +22,9 @@
 
   <servers>
     <server>
-      <id>central</id>
-      <username>${env.JFROG_USERNAME}</username>
-      <password>${env.JFROG_PASSWORD}</password>
-    </server>
-    <server>
-      <id>snapshots</id>
-      <username>${env.JFROG_USERNAME}</username>
-      <password>${env.JFROG_PASSWORD}</password>
+      <id>github</id>
+      <username>${env.USERNAME}</username>
+      <password>${env.GITHUB_TOKEN}</password>
     </server>
   </servers>
 </settings>

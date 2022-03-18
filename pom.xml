@@ -22,7 +22,7 @@
 
   <groupId>com.github.hpgrahsl.kafka.connect</groupId>
   <artifactId>kafka-connect-transform-kryptonite-parent</artifactId>
-  <version>0.3.1-SNAPSHOT</version>
+  <version>0.0.1-SNAPSHOT</version>
   <packaging>pom</packaging>
 
   <name>kafka-connect-transform-kryptonite-parent</name>
@@ -83,15 +83,10 @@
 
   <distributionManagement>
     <repository>
-      <id>central</id>
-      <name>mercari-releases</name>
-      <url>https://mercari.jfrog.io/mercari/libs-release-local</url>
+      <id>github</id>
+      <name>github-packages</name>
+      <url>https://maven.pkg.github.com/mercari/kafka-connect-transform-kryptonite-gcp</url>
     </repository>
-    <snapshotRepository>
-      <id>snapshots</id>
-      <name>mercari-snapshots</name>
-      <url>https://mercari.jfrog.io/mercari/libs-snapshot-local</url>
-    </snapshotRepository>
   </distributionManagement>
 
   <dependencyManagement>
