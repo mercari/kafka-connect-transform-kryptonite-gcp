@@ -82,12 +82,7 @@ public abstract class RecordHandler implements FieldPathMatcher {
       }
     } catch (Exception e) {
       throw new DataException(
-          "error: "
-              + cipherMode
-              + " of field path '"
-              + matchedPath
-              + "' failed unexpectedly",
-          e);
+          "error: " + cipherMode + " of field path '" + matchedPath + "' failed unexpectedly", e);
     }
   }
 
