@@ -95,6 +95,8 @@ public abstract class CipherField<R extends ConnectRecord<R>> implements Transfo
   public static final String CIPHER_MODE = "cipher_mode";
   public static final String KEY_SOURCE = "key_source";
   public static final String KMS_KEY_NAME = "kms_key_name";
+  public static final String KRYO_OUTPUT_BUFFER_SIZE = "kryo_output_buffer_size";
+  public static final String KRYO_OUTPUT_BUFFER_SIZE_MAX = "kryo_output_buffer_size_max";
 
   private static final String PATH_DELIMITER_DEFAULT = ".";
   private static final String FIELD_MODE_DEFAULT = "ELEMENT";
@@ -105,6 +107,8 @@ public abstract class CipherField<R extends ConnectRecord<R>> implements Transfo
   private static final String KEY_SOURCE_DEFAULT = "CONFIG";
   private static final String CIPHER_DATA_KEYS_DEFAULT = "[]";
   private static final String KMS_KEY_NAME_DEFAULT = null;
+  private static final int KRYO_OUTPUT_BUFFER_SIZE_DEFAULT = 32;
+  private static final int KRYO_OUTPUT_BUFFER_SIZE_MAX_DEFAULT = -1;
 
   public static final ConfigDef CONFIG_DEF =
       new ConfigDef()
@@ -207,7 +211,19 @@ public abstract class CipherField<R extends ConnectRecord<R>> implements Transfo
               KMS_KEY_NAME_DEFAULT,
               Importance.MEDIUM,
               "The GCP Cloud KMS key name for decrypting a data encryption key (DEK), "
-                  + "if the DEK is encrypted with a key encryption key (KEK)");
+                  + "if the DEK is encrypted with a key encryption key (KEK)")
+          .define(
+              KRYO_OUTPUT_BUFFER_SIZE,
+              Type.INT,
+              KRYO_OUTPUT_BUFFER_SIZE_DEFAULT,
+              Importance.LOW,
+              "Initial buffer size for kryo to serialize. Default is 32")
+          .define(
+              KRYO_OUTPUT_BUFFER_SIZE_MAX,
+              Type.INT,
+              KRYO_OUTPUT_BUFFER_SIZE_MAX_DEFAULT,
+              Importance.LOW,
+              "Maximum buffer size for kryo to serialize. Default -1 corresponds to no upper limit (up to Integer.MAX_VALUE - 8 technically).");
 
   private static final String PURPOSE = "(de)cipher record fields";
 
@@ -269,7 +285,9 @@ public abstract class CipherField<R extends ConnectRecord<R>> implements Transfo
               .stream()
               .collect(Collectors.toMap(FieldConfig::getName, Function.identity()));
       Kryptonite kryptonite = configureKryptonite(config);
-      SerdeProcessor serdeProcessor = new KryoSerdeProcessor();
+      SerdeProcessor serdeProcessor =
+          new KryoSerdeProcessor(
+              config.getInt(KRYO_OUTPUT_BUFFER_SIZE), config.getInt(KRYO_OUTPUT_BUFFER_SIZE_MAX));
       recordHandlerWithSchema =
           new SchemaawareRecordHandler(
               config,

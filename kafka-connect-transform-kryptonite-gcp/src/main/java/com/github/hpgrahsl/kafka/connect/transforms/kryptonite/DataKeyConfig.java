@@ -74,9 +74,6 @@ public class DataKeyConfig {
 
   @Override
   public String toString() {
-    return "DataKeyConfig{"
-        + "identifier='"
-        + getIdentifier()
-        + "'}";
+    return "DataKeyConfig{" + "identifier='" + getIdentifier() + "'}";
   }
 }
