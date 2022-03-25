@@ -36,9 +36,9 @@ public class KryoSerdeProcessor implements SerdeProcessor {
   private final int outputBufSize;
   private final int outputBufMaxSize;
 
-  public KryoSerdeProcessor(int outputBufSz, int outputBufMaxSz) {
-    this.outputBufSize = outputBufSz;
-    this.outputBufMaxSize = outputBufMaxSz;
+  public KryoSerdeProcessor(int outputBufSize, int outputBufMaxSize) {
+    this.outputBufSize = outputBufSize;
+    this.outputBufMaxSize = outputBufMaxSize;
   }
 
   public byte[] objectToBytes(Object object, Class<?> clazz) {
