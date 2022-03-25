@@ -20,7 +20,6 @@ import com.esotericsoftware.kryo.Kryo;
 import com.esotericsoftware.kryo.Serializer;
 import com.esotericsoftware.kryo.io.Input;
 import com.esotericsoftware.kryo.io.Output;
-import java.io.ByteArrayOutputStream;
 import java.util.ArrayList;
 import java.util.List;
 import org.apache.kafka.connect.data.ConnectSchema;
@@ -34,15 +33,20 @@ import org.slf4j.LoggerFactory;
 public class KryoSerdeProcessor implements SerdeProcessor {
 
   private static final Logger LOGGER = LoggerFactory.getLogger(KryoSerdeProcessor.class);
+  private final int outputBufSize;
+  private final int outputBufMaxSize;
 
-  public KryoSerdeProcessor() {}
+  public KryoSerdeProcessor(int outputBufSize, int outputBufMaxSize) {
+    this.outputBufSize = outputBufSize;
+    this.outputBufMaxSize = outputBufMaxSize;
+  }
 
   public byte[] objectToBytes(Object object, Class<?> clazz) {
     return objectToBytes(object);
   }
 
   public byte[] objectToBytes(Object object) {
-    Output output = new Output(new ByteArrayOutputStream());
+    Output output = new Output(outputBufSize, outputBufMaxSize);
     KryoInstance.get().writeClassAndObject(output, object);
     return output.toBytes();
   }
