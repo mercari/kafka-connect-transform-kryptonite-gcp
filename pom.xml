@@ -76,9 +76,9 @@
     <logback.version>1.2.8</logback.version>
     <junit.version>5.7.0</junit.version>
     <shade.plugin.version>3.2.4</shade.plugin.version>
+    <spotless.version>2.33.0</spotless.version>
     <compiler.plugin.version>3.8.0</compiler.plugin.version>
     <surefire.plugin.version>2.22.2</surefire.plugin.version>
-    <fmt.plugin.version>2.9</fmt.plugin.version>
   </properties>
 
   <distributionManagement>
@@ -174,13 +174,23 @@
           <version>${surefire.plugin.version}</version>
         </plugin>
         <plugin>
-          <groupId>com.coveo</groupId>
-          <artifactId>fmt-maven-plugin</artifactId>
-          <version>${fmt.plugin.version}</version>
+          <groupId>com.diffplug.spotless</groupId>
+          <artifactId>spotless-maven-plugin</artifactId>
+          <version>${spotless.version}</version>
+          <configuration>
+            <java>
+              <googleJavaFormat>
+                <version>1.8</version>
+                <style>GOOGLE</style>
+              </googleJavaFormat>
+              <removeUnusedImports />
+            </java>
+          </configuration>
           <executions>
             <execution>
+              <id>spotless-check</id>
+              <phase>compile</phase>
               <goals>
-                <goal>format</goal>
                 <goal>check</goal>
               </goals>
             </execution>
