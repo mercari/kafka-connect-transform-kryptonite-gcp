@@ -28,7 +28,7 @@
   <name>kafka-connect-transform-kryptonite-parent</name>
 
   <description>Kryptonite: An SMT for Kafka Connect</description>
-  <url>https://github.com/mercari/kafka-connect-smt-kryptonite-gcp</url>
+  <url>https://github.com/mercari/kafka-connect-transform-kryptonite-gcp</url>
   <licenses>
     <license>
       <name>The Apache License, Version 2.0</name>
@@ -48,13 +48,13 @@
     </developer>
   </developers>
   <scm>
-    <connection>scm:git:git://github.com/mercari/kafka-connect-smt-kryptonite-gcp.git</connection>
-    <developerConnection>scm:git:ssh://github.com:mercari/kafka-connect-smt-kryptonite-gcp.git</developerConnection>
-    <url>https://github.com/mercari/kafka-connect-smt-kryptonite-gcp</url>
+    <connection>scm:git:git://github.com/mercari/kafka-connect-transform-kryptonite-gcp.git</connection>
+    <developerConnection>scm:git:ssh://github.com:mercari/kafka-connect-transform-kryptonite-gcp.git</developerConnection>
+    <url>https://github.com/mercari/kafka-connect-transform-kryptonite-gcp</url>
   </scm>
   <issueManagement>
     <system>github</system>
-    <url>https://github.com/mercari/kafka-connect-smt-kryptonite-gcp/issues</url>
+    <url>https://github.com/mercari/kafka-connect-transform-kryptonite-gcp/issues</url>
   </issueManagement>
 
   <modules>
