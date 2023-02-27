@@ -1,15 +1,15 @@
 .PHONY: chk
 chk:
-	mvn spotless:check
+	./mvnw spotless:check
 
 .PHONY: fmt
 fmt:
-	mvn spotless:apply
+	./mvnw spotless:apply
 
 .PHONY: test
 test:
-	mvn verify
+	./mvnw verify
 
 .PHONY: jar
 jar:
-	mvn clean package
+	./mvnw clean package
