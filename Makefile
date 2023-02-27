@@ -1,10 +1,10 @@
 .PHONY: chk
 chk:
-	 mvn com.coveo:fmt-maven-plugin:check
+	mvn spotless:check
 
 .PHONY: fmt
 fmt:
-	 mvn com.coveo:fmt-maven-plugin:format
+	mvn spotless:apply
 
 .PHONY: test
 test:
