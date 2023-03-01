@@ -63,9 +63,10 @@
   </modules>
 
   <properties>
+    <java.version>11</java.version>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-    <maven.compiler.source>1.8</maven.compiler.source>
-    <maven.compiler.target>1.8</maven.compiler.target>
+    <maven.compiler.source>${java.version}</maven.compiler.source>
+    <maven.compiler.target>${java.version}</maven.compiler.target>
     <kafka.version>3.3.2</kafka.version>
     <jackson.version>2.14.2</jackson.version>
     <kryo.version>5.4.0</kryo.version>
