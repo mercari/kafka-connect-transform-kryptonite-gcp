@@ -14,18 +14,11 @@
  * limitations under the License.
  */
 
-package com.github.hpgrahsl.kryptonite;
+package com.github.hpgrahsl.kryptonite.crypto;
 
-import java.util.HashMap;
-import java.util.Map;
+public interface CryptoAlgorithm {
 
-public abstract class KeyStrategy {
+  byte[] cipher(byte[] plaintext, byte[] key) throws Exception;
 
-  private final Map<String, byte[]> keyCache = new HashMap<>();
-
-  public Map<String, byte[]> getKeyCache() {
-    return keyCache;
-  }
-
-  abstract byte[] processKey(byte[] origKeyBytes, String identifier);
+  byte[] decipher(byte[] ciphertext, byte[] key) throws Exception;
 }

@@ -1,5 +1,6 @@
-package com.github.hpgrahsl.kryptonite;
+package com.github.hpgrahsl.kryptonite.key.gcp;
 
+import com.github.hpgrahsl.kryptonite.key.KeyStrategy;
 import com.google.cloud.kms.v1.CryptoKeyName;
 import com.google.cloud.kms.v1.DecryptResponse;
 import com.google.cloud.kms.v1.KeyManagementServiceClient;
@@ -21,7 +22,7 @@ public class GcpKmsKeyStrategy extends KeyStrategy {
   }
 
   @Override
-  byte[] processKey(byte[] origKeyBytes, String identifier) {
+  public byte[] processKey(byte[] origKeyBytes, String identifier) {
     LOGGER.info("Process key: " + identifier);
     LOGGER.info("KEK name: " + keyName);
     DecryptResponse resp = client.decrypt(keyName, ByteString.copyFrom(origKeyBytes));

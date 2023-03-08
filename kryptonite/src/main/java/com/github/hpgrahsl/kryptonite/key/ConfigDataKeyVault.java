@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.github.hpgrahsl.kryptonite;
+package com.github.hpgrahsl.kryptonite.key;
 
 import java.util.Map;
 

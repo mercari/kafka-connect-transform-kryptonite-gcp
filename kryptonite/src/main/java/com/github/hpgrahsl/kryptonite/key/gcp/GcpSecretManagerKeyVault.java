@@ -1,9 +1,11 @@
-package com.github.hpgrahsl.kryptonite;
+package com.github.hpgrahsl.kryptonite.key.gcp;
 
 import com.github.benmanes.caffeine.cache.Caffeine;
 import com.github.benmanes.caffeine.cache.LoadingCache;
 import com.github.benmanes.caffeine.cache.RemovalCause;
 import com.github.benmanes.caffeine.cache.RemovalListener;
+import com.github.hpgrahsl.kryptonite.key.KeyStrategy;
+import com.github.hpgrahsl.kryptonite.key.KeyVault;
 import com.google.cloud.secretmanager.v1.AccessSecretVersionResponse;
 import com.google.cloud.secretmanager.v1.SecretManagerServiceClient;
 import com.google.cloud.secretmanager.v1.SecretManagerServiceClient.ListSecretVersionsPagedResponse;
@@ -79,7 +81,7 @@ public class GcpSecretManagerKeyVault extends KeyVault {
   }
 
   @Override
-  byte[] readKey(String identifier) {
+  public byte[] readKey(String identifier) {
     byte[] keyBytes = secretCache.get(identifier);
     if (keyBytes == null) {
       LOGGER.info("Read key: " + identifier);

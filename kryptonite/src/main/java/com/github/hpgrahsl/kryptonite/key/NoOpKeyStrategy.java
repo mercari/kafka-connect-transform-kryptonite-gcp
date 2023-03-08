@@ -14,27 +14,12 @@
  * limitations under the License.
  */
 
-package com.github.hpgrahsl.kryptonite;
+package com.github.hpgrahsl.kryptonite.key;
 
-@SuppressWarnings("serial")
-public class KeyNotFoundException extends KeyException {
+public class NoOpKeyStrategy extends KeyStrategy {
 
-  public KeyNotFoundException() {}
-
-  public KeyNotFoundException(String message) {
-    super(message);
-  }
-
-  public KeyNotFoundException(String message, Throwable cause) {
-    super(message, cause);
-  }
-
-  public KeyNotFoundException(Throwable cause) {
-    super(cause);
-  }
-
-  public KeyNotFoundException(
-      String message, Throwable cause, boolean enableSuppression, boolean writableStackTrace) {
-    super(message, cause, enableSuppression, writableStackTrace);
+  @Override
+  public byte[] processKey(byte[] origKeyBytes, String identifier) {
+    return origKeyBytes;
   }
 }

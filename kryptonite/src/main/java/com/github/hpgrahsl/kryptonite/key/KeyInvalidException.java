@@ -14,11 +14,27 @@
  * limitations under the License.
  */
 
-package com.github.hpgrahsl.kryptonite;
+package com.github.hpgrahsl.kryptonite.key;
 
-public interface CryptoAlgorithm {
+@SuppressWarnings("serial")
+public class KeyInvalidException extends KeyException {
 
-  byte[] cipher(byte[] plaintext, byte[] key) throws Exception;
+  public KeyInvalidException() {}
 
-  byte[] decipher(byte[] ciphertext, byte[] key) throws Exception;
+  public KeyInvalidException(String message) {
+    super(message);
+  }
+
+  public KeyInvalidException(String message, Throwable cause) {
+    super(message, cause);
+  }
+
+  public KeyInvalidException(Throwable cause) {
+    super(cause);
+  }
+
+  public KeyInvalidException(
+      String message, Throwable cause, boolean enableSuppression, boolean writableStackTrace) {
+    super(message, cause, enableSuppression, writableStackTrace);
+  }
 }
