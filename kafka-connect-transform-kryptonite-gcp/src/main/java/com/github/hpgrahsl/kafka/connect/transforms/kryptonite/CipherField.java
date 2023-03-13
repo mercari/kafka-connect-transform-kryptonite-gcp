@@ -33,10 +33,10 @@ import com.github.hpgrahsl.kafka.connect.transforms.kryptonite.validators.FieldM
 import com.github.hpgrahsl.kafka.connect.transforms.kryptonite.validators.KeySourceValidator;
 import com.github.hpgrahsl.kafka.connect.transforms.kryptonite.validators.TimeUnitValidator;
 import com.github.hpgrahsl.kryptonite.CipherMode;
-import com.github.hpgrahsl.kryptonite.ConfigDataKeyVault;
-import com.github.hpgrahsl.kryptonite.GcpSecretManagerKeyVault;
 import com.github.hpgrahsl.kryptonite.Kryptonite;
-import com.github.hpgrahsl.kryptonite.NoOpKeyStrategy;
+import com.github.hpgrahsl.kryptonite.key.ConfigDataKeyVault;
+import com.github.hpgrahsl.kryptonite.key.NoOpKeyStrategy;
+import com.github.hpgrahsl.kryptonite.key.gcp.GcpSecretManagerKeyVault;
 import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.Set;

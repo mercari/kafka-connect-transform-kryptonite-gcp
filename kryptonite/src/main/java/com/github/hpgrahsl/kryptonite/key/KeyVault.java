@@ -14,12 +14,15 @@
  * limitations under the License.
  */
 
-package com.github.hpgrahsl.kryptonite;
+package com.github.hpgrahsl.kryptonite.key;
 
-public class NoOpKeyStrategy extends KeyStrategy {
+public abstract class KeyVault {
 
-  @Override
-  public byte[] processKey(byte[] origKeyBytes, String identifier) {
-    return origKeyBytes;
+  protected KeyStrategy keyStrategy;
+
+  public KeyVault(KeyStrategy keyStrategy) {
+    this.keyStrategy = keyStrategy;
   }
+
+  public abstract byte[] readKey(String identifier);
 }

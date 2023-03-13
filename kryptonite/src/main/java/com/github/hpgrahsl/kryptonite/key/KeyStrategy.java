@@ -14,15 +14,18 @@
  * limitations under the License.
  */
 
-package com.github.hpgrahsl.kryptonite;
+package com.github.hpgrahsl.kryptonite.key;
 
-public abstract class KeyVault {
+import java.util.HashMap;
+import java.util.Map;
 
-  KeyStrategy keyStrategy;
+public abstract class KeyStrategy {
 
-  public KeyVault(KeyStrategy keyStrategy) {
-    this.keyStrategy = keyStrategy;
+  private final Map<String, byte[]> keyCache = new HashMap<>();
+
+  public Map<String, byte[]> getKeyCache() {
+    return keyCache;
   }
 
-  abstract byte[] readKey(String identifier);
+  public abstract byte[] processKey(byte[] origKeyBytes, String identifier);
 }
