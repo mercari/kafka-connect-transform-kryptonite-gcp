@@ -22,7 +22,7 @@
 
   <groupId>com.github.hpgrahsl.kafka.connect</groupId>
   <artifactId>kafka-connect-transform-kryptonite-parent</artifactId>
-  <version>0.0.3</version>
+  <version>0.0.4-SNAPSHOT</version>
   <packaging>pom</packaging>
 
   <name>kafka-connect-transform-kryptonite-parent</name>
