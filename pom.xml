@@ -154,6 +154,10 @@
                 <!--<minimizeJar>true</minimizeJar>-->
                 <relocations>
                   <relocation>
+                    <pattern>autovalue</pattern>
+                    <shadedPattern>com.github.hpgrahsl.kafka.connect.shaded.autovalue</shadedPattern>
+                  </relocation>
+                  <relocation>
                     <pattern>org</pattern>
                     <shadedPattern>com.github.hpgrahsl.kafka.connect.shaded.org</shadedPattern>
                   </relocation>
@@ -170,12 +174,8 @@
                     <shadedPattern>com.github.hpgrahsl.kafka.connect.shaded.opencensus</shadedPattern>
                   </relocation>
                   <relocation>
-                    <pattern>io.opencensus</pattern>
-                    <shadedPattern>com.github.hpgrahsl.kafka.connect.shaded.io.opencensus</shadedPattern>
-                  </relocation>
-                  <relocation>
-                    <pattern>io.grpc</pattern>
-                    <shadedPattern>com.github.hpgrahsl.kafka.connect.shaded.io.grpc</shadedPattern>
+                    <pattern>io</pattern>
+                    <shadedPattern>com.github.hpgrahsl.kafka.connect.shaded.io</shadedPattern>
                   </relocation>
                   <relocation>
                     <pattern>com.fasterxml</pattern>
