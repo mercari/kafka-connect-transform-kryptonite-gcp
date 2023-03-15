@@ -71,7 +71,7 @@
     <jackson.version>2.14.2</jackson.version>
     <kryo.version>5.4.0</kryo.version>
     <caffeine.version>3.1.4</caffeine.version>
-    <google.cloud.bom.version>0.190.0</google.cloud.bom.version>
+    <google.cloud.bom.version>0.191.0</google.cloud.bom.version>
     <grpc.version>1.53.0</grpc.version>
     <slf4j.version>2.0.6</slf4j.version>
     <logback.version>1.4.5</logback.version>
@@ -144,24 +144,43 @@
               </goals>
               <configuration>
                 <artifactSet>
+                  <includes combine.children="append">
+                    <include>*:*</include>
+                  </includes>
                   <excludes>
                     <exclude>org.slf4j:slf4j-api:jar:</exclude>
                     <exclude>org.slf4j:slf4j-log4j12:jar:</exclude>
                     <exclude>log4j:log4j:jar:</exclude>
                   </excludes>
                 </artifactSet>
+                <createDependencyReducedPom>false</createDependencyReducedPom>
+                <shadedArtifactAttached>false</shadedArtifactAttached>
                 <!-- https://github.com/grpc/grpc-java/issues/5794 -->
-                <!--<minimizeJar>true</minimizeJar>-->
+                <minimizeJar>false</minimizeJar>
                 <relocations>
                   <relocation>
                     <pattern>autovalue</pattern>
                     <shadedPattern>com.github.hpgrahsl.kafka.connect.shaded.autovalue</shadedPattern>
                   </relocation>
                   <relocation>
-                    <pattern>org</pattern>
-                    <shadedPattern>com.github.hpgrahsl.kafka.connect.shaded.org</shadedPattern>
+                    <pattern>org.apache</pattern>
+                    <shadedPattern>com.github.hpgrahsl.kafka.connect.shaded.org.apache</shadedPattern>
                   </relocation>
                   <relocation>
+                    <pattern>opencensus</pattern>
+                    <shadedPattern>com.github.hpgrahsl.kafka.connect.shaded.opencensus</shadedPattern>
+                  </relocation>
+                  <relocation>
+                    <pattern>io.opencensus</pattern>
+                    <shadedPattern>com.github.hpgrahsl.kafka.connect.shaded.io.opencensus</shadedPattern>
+                  </relocation>
+                  <!--
+                  TODO: The following error occurs at runtime when relocating.
+                    UNIMPLEMENTED: The GRPC target is not implemented on the server,
+                      host: secretmanager.googleapis.com,
+                      method: /com/github/hpgrahsl/kafka/connect/shaded/google.cloud.secretmanager.v1.SecretManagerService/ListSecretVersions.
+                  -->
+                  <!--<relocation>
                     <pattern>google</pattern>
                     <shadedPattern>com.github.hpgrahsl.kafka.connect.shaded.google</shadedPattern>
                   </relocation>
@@ -170,12 +189,12 @@
                     <shadedPattern>com.github.hpgrahsl.kafka.connect.shaded.com.google</shadedPattern>
                   </relocation>
                   <relocation>
-                    <pattern>opencensus</pattern>
-                    <shadedPattern>com.github.hpgrahsl.kafka.connect.shaded.opencensus</shadedPattern>
-                  </relocation>
+                    <pattern>io.grpc</pattern>
+                    <shadedPattern>com.github.hpgrahsl.kafka.connect.shaded.io.grpc</shadedPattern>
+                  </relocation>-->
                   <relocation>
-                    <pattern>io</pattern>
-                    <shadedPattern>com.github.hpgrahsl.kafka.connect.shaded.io</shadedPattern>
+                    <pattern>io.perfmark</pattern>
+                    <shadedPattern>com.github.hpgrahsl.kafka.connect.shaded.io.perfmark</shadedPattern>
                   </relocation>
                   <relocation>
                     <pattern>com.fasterxml</pattern>
