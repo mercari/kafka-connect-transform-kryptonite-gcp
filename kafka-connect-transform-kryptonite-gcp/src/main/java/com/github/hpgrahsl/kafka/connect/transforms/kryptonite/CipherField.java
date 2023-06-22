@@ -234,6 +234,7 @@ public abstract class CipherField<R extends ConnectRecord<R>> implements Transfo
   private RecordHandler recordHandlerWithoutSchema;
   private SchemaRewriter schemaRewriter;
   private Cache<Schema, Schema> schemaCache;
+  private Kryptonite kryptonite;
 
   @Override
   public R apply(R record) {
@@ -273,7 +274,11 @@ public abstract class CipherField<R extends ConnectRecord<R>> implements Transfo
   }
 
   @Override
-  public void close() {}
+  public void close() {
+    if (kryptonite != null) {
+      kryptonite.close();
+    }
+  }
 
   @Override
   public void configure(Map<String, ?> props) {
@@ -284,7 +289,7 @@ public abstract class CipherField<R extends ConnectRecord<R>> implements Transfo
               .readValue(config.getString(FIELD_CONFIG), new TypeReference<Set<FieldConfig>>() {})
               .stream()
               .collect(Collectors.toMap(FieldConfig::getName, Function.identity()));
-      Kryptonite kryptonite = configureKryptonite(config);
+      kryptonite = configureKryptonite(config);
       SerdeProcessor serdeProcessor =
           new KryoSerdeProcessor(
               config.getInt(KRYO_OUTPUT_BUFFER_SIZE), config.getInt(KRYO_OUTPUT_BUFFER_SIZE_MAX));

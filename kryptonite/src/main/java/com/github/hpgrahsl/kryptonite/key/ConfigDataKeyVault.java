@@ -44,4 +44,7 @@ public class ConfigDataKeyVault extends KeyVault {
     }
     return keyStrategy.processKey(keyBytes, identifier);
   }
+
+  @Override
+  public void close() {}
 }

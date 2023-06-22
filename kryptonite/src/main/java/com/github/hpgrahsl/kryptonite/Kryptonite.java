@@ -94,4 +94,8 @@ public class Kryptonite {
       throw new DataException("Illegal cipher text format.");
     }
   }
+
+  public void close() {
+    this.keyVault.close();
+  }
 }

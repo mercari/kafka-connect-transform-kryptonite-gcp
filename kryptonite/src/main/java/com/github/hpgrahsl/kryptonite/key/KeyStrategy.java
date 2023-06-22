@@ -28,4 +28,6 @@ public abstract class KeyStrategy {
   }
 
   public abstract byte[] processKey(byte[] origKeyBytes, String identifier);
+
+  public abstract void close();
 }

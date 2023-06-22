@@ -28,4 +28,9 @@ public class GcpKmsKeyStrategy extends KeyStrategy {
     DecryptResponse resp = client.decrypt(keyName, ByteString.copyFrom(origKeyBytes));
     return resp.getPlaintext().toByteArray();
   }
+
+  @Override
+  public void close() {
+    this.client.close();
+  }
 }
