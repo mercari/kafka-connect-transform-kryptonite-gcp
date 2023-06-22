@@ -22,4 +22,7 @@ public class NoOpKeyStrategy extends KeyStrategy {
   public byte[] processKey(byte[] origKeyBytes, String identifier) {
     return origKeyBytes;
   }
+
+  @Override
+  public void close() {}
 }

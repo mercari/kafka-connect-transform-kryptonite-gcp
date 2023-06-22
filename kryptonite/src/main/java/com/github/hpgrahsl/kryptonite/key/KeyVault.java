@@ -25,4 +25,6 @@ public abstract class KeyVault {
   }
 
   public abstract byte[] readKey(String identifier);
+
+  public abstract void close();
 }

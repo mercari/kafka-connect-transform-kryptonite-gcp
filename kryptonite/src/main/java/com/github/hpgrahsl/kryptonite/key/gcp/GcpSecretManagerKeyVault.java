@@ -89,4 +89,10 @@ public class GcpSecretManagerKeyVault extends KeyVault {
     }
     return keyBytes;
   }
+
+  @Override
+  public void close() {
+    this.client.close();
+    this.keyStrategy.close();
+  }
 }
