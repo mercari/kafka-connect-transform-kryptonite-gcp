@@ -6,6 +6,7 @@ import com.google.cloud.kms.v1.DecryptResponse;
 import com.google.cloud.kms.v1.KeyManagementServiceClient;
 import com.google.protobuf.ByteString;
 import java.io.IOException;
+import java.util.concurrent.TimeUnit;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -31,6 +32,14 @@ public class GcpKmsKeyStrategy extends KeyStrategy {
 
   @Override
   public void close() {
+    this.client.shutdown();
+    try {
+      if (!this.client.awaitTermination(30, TimeUnit.SECONDS)) {
+        this.client.shutdownNow();
+      }
+    } catch (InterruptedException e) {
+      this.client.shutdownNow();
+    }
     this.client.close();
   }
 }

@@ -92,6 +92,14 @@ public class GcpSecretManagerKeyVault extends KeyVault {
 
   @Override
   public void close() {
+    this.client.shutdown();
+    try {
+      if (!this.client.awaitTermination(30, TimeUnit.SECONDS)) {
+        this.client.shutdownNow();
+      }
+    } catch (InterruptedException e) {
+      this.client.shutdownNow();
+    }
     this.client.close();
     this.keyStrategy.close();
   }
