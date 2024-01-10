@@ -163,8 +163,12 @@
                     <shadedPattern>com.github.hpgrahsl.kafka.connect.shaded.autovalue</shadedPattern>
                   </relocation>
                   <relocation>
-                    <pattern>org.apache</pattern>
-                    <shadedPattern>com.github.hpgrahsl.kafka.connect.shaded.org.apache</shadedPattern>
+                    <pattern>org.apache.commons</pattern>
+                    <shadedPattern>com.github.hpgrahsl.kafka.connect.shaded.org.apache.commons</shadedPattern>
+                  </relocation>
+                  <relocation>
+                    <pattern>org.apache.http</pattern>
+                    <shadedPattern>com.github.hpgrahsl.kafka.connect.shaded.org.apache.http</shadedPattern>
                   </relocation>
                   <relocation>
                     <pattern>opencensus</pattern>
