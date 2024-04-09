@@ -76,10 +76,10 @@
     <slf4j.version>2.0.6</slf4j.version>
     <logback.version>1.4.5</logback.version>
     <junit.version>5.7.0</junit.version>
-    <spotless.version>2.33.0</spotless.version>
     <shade.plugin.version>3.4.1</shade.plugin.version>
     <compiler.plugin.version>3.10.1</compiler.plugin.version>
     <surefire.plugin.version>2.22.2</surefire.plugin.version>
+    <spotless.version>2.43.0</spotless.version>
   </properties>
 
   <distributionManagement>
