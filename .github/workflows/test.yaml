@@ -6,12 +6,15 @@ on:
 jobs:
   test:
     runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        java-version: [11, 17, 21]
 
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-java@v4
         with:
-          java-version: "11"
+          java-version: ${{ matrix.java-version }}
           distribution: "temurin"
           cache: 'maven'
       - name: Build with Maven
