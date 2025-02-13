@@ -10,7 +10,7 @@
       <id>mercari</id>
       <repositories>
         <repository>
-          <id>githubl</id>
+          <id>github</id>
           <url>https://maven.pkg.github.com/mercari/kafka-connect-transform-kryptonite-gcp</url>
           <snapshots>
             <enabled>true</enabled>
