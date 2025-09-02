@@ -67,12 +67,12 @@
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     <maven.compiler.source>${java.version}</maven.compiler.source>
     <maven.compiler.target>${java.version}</maven.compiler.target>
-    <kafka.version>3.7.0</kafka.version>
-    <jackson.version>2.16.0</jackson.version>
+    <kafka.version>3.8.1</kafka.version>
+    <jackson.version>2.17.3</jackson.version>
     <kryo.version>5.4.0</kryo.version>
     <caffeine.version>3.1.8</caffeine.version>
-    <google.cloud.bom.version>0.218.0</google.cloud.bom.version>
-    <grpc.version>1.62.2</grpc.version>
+    <google.cloud.bom.version>26.66.0</google.cloud.bom.version>
+    <grpc.version>1.67.1</grpc.version>
     <slf4j.version>2.0.12</slf4j.version>
     <logback.version>1.5.3</logback.version>
     <junit.version>5.10.2</junit.version>
@@ -94,7 +94,7 @@
     <dependencies>
       <dependency>
         <groupId>com.google.cloud</groupId>
-        <artifactId>google-cloud-bom</artifactId>
+        <artifactId>libraries-bom</artifactId>
         <version>${google.cloud.bom.version}</version>
         <type>pom</type>
         <scope>import</scope>
