@@ -6,8 +6,11 @@ on:
       - master
 
 jobs:
-  publish:
+  publish-github:
     runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      packages: write
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-java@v4
@@ -15,7 +18,7 @@ jobs:
           java-version: '11'
           distribution: 'temurin'
           cache: 'maven'
-      - name: Publish snapshot package
+      - name: Publish snapshot package to GitHub Packages
         run: |
           VERSION=$(mvn org.apache.maven.plugins:maven-help-plugin:3.2.0:evaluate -Dexpression=project.version|grep -Ev '(^\[|Download\w+:)')
           if [[ ${VERSION} == *SNAPSHOT ]]; then
@@ -24,3 +27,31 @@ jobs:
         env:
           USERNAME: ${{ secrets.USERNAME }}
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+  publish-gar:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      id-token: write
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-java@v4
+        with:
+          java-version: '11'
+          distribution: 'temurin'
+          cache: 'maven'
+      - name: Authenticate to Google Cloud
+        id: gcp-auth
+        uses: google-github-actions/auth@v2
+        with:
+          workload_identity_provider: projects/216572124863/locations/global/workloadIdentityPools/github-actions/providers/github-actions
+          service_account: kryptonite-gha@merpay-dataplatform-jp-prod.iam.gserviceaccount.com
+          token_format: 'access_token'
+      - name: Publish snapshot package to GAR
+        run: |
+          VERSION=$(mvn org.apache.maven.plugins:maven-help-plugin:3.2.0:evaluate -Dexpression=project.version|grep -Ev '(^\[|Download\w+:)')
+          if [[ ${VERSION} == *SNAPSHOT ]]; then
+            mvn -s ${{ github.workspace }}/.github/workflows/settings.xml -P gar --batch-mode deploy
+          fi
+        env:
+          GAR_ACCESS_TOKEN: ${{ steps.gcp-auth.outputs.access_token }}
