@@ -271,4 +271,20 @@
 
   </build>
 
+  <profiles>
+    <profile>
+      <id>gar</id>
+      <distributionManagement>
+        <repository>
+          <id>artifact-registry</id>
+          <url>https://us-maven.pkg.dev/merpay-dataplatform-jp-prod/maven</url>
+        </repository>
+        <snapshotRepository>
+          <id>artifact-registry</id>
+          <url>https://us-maven.pkg.dev/merpay-dataplatform-jp-prod/maven</url>
+        </snapshotRepository>
+      </distributionManagement>
+    </profile>
+  </profiles>
+
 </project>
