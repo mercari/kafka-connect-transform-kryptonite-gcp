@@ -15,12 +15,10 @@ import java.io.IOException;
 import java.util.Arrays;
 import java.util.Base64;
 import java.util.concurrent.TimeUnit;
-import org.jspecify.annotations.NullMarked;
 import org.jspecify.annotations.Nullable;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-@NullMarked
 public class GcpSecretManagerKeyVault extends KeyVault {
 
   private static final Logger LOGGER = LoggerFactory.getLogger(GcpSecretManagerKeyVault.class);
