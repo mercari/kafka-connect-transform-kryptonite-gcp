@@ -15,11 +15,12 @@ import java.io.IOException;
 import java.util.Arrays;
 import java.util.Base64;
 import java.util.concurrent.TimeUnit;
-import org.checkerframework.checker.nullness.qual.NonNull;
-import org.checkerframework.checker.nullness.qual.Nullable;
+import org.jspecify.annotations.NullMarked;
+import org.jspecify.annotations.Nullable;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+@NullMarked
 public class GcpSecretManagerKeyVault extends KeyVault {
 
   private static final Logger LOGGER = LoggerFactory.getLogger(GcpSecretManagerKeyVault.class);
@@ -48,9 +49,7 @@ public class GcpSecretManagerKeyVault extends KeyVault {
                 new RemovalListener<String, byte[]>() {
                   @Override
                   public void onRemoval(
-                      @Nullable String s,
-                      byte @Nullable [] bytes,
-                      @NonNull RemovalCause removalCause) {
+                      @Nullable String s, byte @Nullable [] bytes, RemovalCause removalCause) {
                     if (bytes != null) {
                       Arrays.fill(bytes, (byte) 0);
                     }
